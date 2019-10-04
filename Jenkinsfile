@@ -2,20 +2,16 @@
 		agent any
 	
 		stages {
-			stage('Init') {
+			stage('Build') {
 				steps {
-					echo "Testing..."
-					}
+					bat 'mvn clean package'
 				}
-				stage('Build') {
-					steps {
-						echo "Building..."
-					}
-				}
-				stage('Deploy') {
-					steps {
-						echo "Building..."
+				post {
+					success {
+						echo 'Now Archiving...'
+						archiveArtifacts artifacts: '**/target/*.war'
 					}
 				}
 			}
-		}	
+		}
+	}	
