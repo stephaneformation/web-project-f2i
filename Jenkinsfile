@@ -13,5 +13,10 @@
 					}
 				}
 			}
+			stage ('Deploy to Staging'){
+				steps {
+					build job: 'deploy-test'
+				}
+			}
 		}
 	}	
